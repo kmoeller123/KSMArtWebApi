@@ -46,7 +46,7 @@ namespace KSMArtWebApi.Controllers
         // PUT: api/ArtObjects/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("Update/{id}")]
-        public async Task<IActionResult> PutArtObject(int id,[FromBody] ArtObject artObject)
+        public async Task<ActionResult<ArtObject>> PutArtObject(int id,[FromBody] ArtObject artObject)
         {
             if (id != artObject.Id)
             {
@@ -71,7 +71,7 @@ namespace KSMArtWebApi.Controllers
                 }
             }
 
-            return NoContent();
+            return artObject;
         }
 
         // POST: api/ArtObjects
