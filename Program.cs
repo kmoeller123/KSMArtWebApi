@@ -3,10 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string cnnt = "ProductionDefault";
+//string cnnt = "DefaultConnection";
+
+
 var connectionString =
-    builder.Configuration.GetConnectionString("DefaultConnection")
+    builder.Configuration.GetConnectionString(cnnt)
         ?? throw new InvalidOperationException("Connection string"
-        + "'DefaultConnection' not found.");
+        + cnnt + " :not found.");
 
 // Add services to the container.
 

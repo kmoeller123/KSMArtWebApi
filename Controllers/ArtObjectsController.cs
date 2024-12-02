@@ -21,14 +21,16 @@ namespace KSMArtWebApi.Controllers
         }
 
         // GET: api/ArtObjects
-        [HttpGet("All")]
+        [HttpGet("All")]    
         public async Task<ActionResult<IEnumerable<ArtObject>>> GetArtObjects()
         {
+            
             return await _context.ArtObjects.ToListAsync();
         }
 
         // GET: api/ArtObjects/5
-        [HttpGet("{id}")]
+        [HttpGet("Details/{id}")]
+        
         public async Task<ActionResult<ArtObject>> GetArtObject(int id)
         {
             var artObject = await _context.ArtObjects.FindAsync(id);
@@ -43,8 +45,8 @@ namespace KSMArtWebApi.Controllers
 
         // PUT: api/ArtObjects/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutArtObject(int id, ArtObject artObject)
+        [HttpPut("Update/{id}")]
+        public async Task<IActionResult> PutArtObject(int id,[FromBody] ArtObject artObject)
         {
             if (id != artObject.Id)
             {
@@ -74,8 +76,8 @@ namespace KSMArtWebApi.Controllers
 
         // POST: api/ArtObjects
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<ArtObject>> PostArtObject(ArtObject artObject)
+        [HttpPost("Create")]
+        public async Task<ActionResult<ArtObject>> PostArtObject([FromBody] ArtObject artObject)
         {
             _context.ArtObjects.Add(artObject);
             await _context.SaveChangesAsync();
@@ -97,6 +99,16 @@ namespace KSMArtWebApi.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        // GET: api/ArtObjects
+        [HttpGet("Test")]
+        public bool Test()
+        {
+            var builder = WebApplication.CreateBuilder();
+            var app = builder.Build();
+
+            return app.Environment.IsDevelopment();
         }
 
         private bool ArtObjectExists(int id)
