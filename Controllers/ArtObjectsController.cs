@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using KSMArtWebApi.Models;
+using KSMArtMauiApp.Services;
+using Azure.Storage.Blobs.Models;
+using System.Drawing;
 
 namespace KSMArtWebApi.Controllers
 {
@@ -26,6 +29,7 @@ namespace KSMArtWebApi.Controllers
         {
             
             return await _context.ArtObjects.ToListAsync();
+
         }
 
         // GET: api/ArtObjects/5
@@ -103,12 +107,15 @@ namespace KSMArtWebApi.Controllers
 
         // GET: api/ArtObjects
         [HttpGet("Test")]
-        public bool Test()
+        public async Task<List<Image>> Test()
         {
-            var builder = WebApplication.CreateBuilder();
-            var app = builder.Build();
+            //var builder = WebApplication.CreateBuilder();
+            //var app = builder.Build();
 
-            return app.Environment.IsDevelopment();
+            //return app.Environment.IsDevelopment();
+
+            AzureFileService srv = new AzureFileService();
+           return await srv.DownloadImageFiles();
         }
 
         private bool ArtObjectExists(int id)
