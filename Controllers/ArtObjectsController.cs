@@ -113,6 +113,7 @@ namespace KSMArtWebApi.Controllers
             //var app = builder.Build();
 
             //return app.Environment.IsDevelopment();
+            //New code
 
             AzureFileService srv = new AzureFileService();
            return await srv.DownloadImageFiles();
