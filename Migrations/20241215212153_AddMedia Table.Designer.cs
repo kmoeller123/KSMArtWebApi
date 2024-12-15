@@ -4,6 +4,7 @@ using KSMArtWebApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KSMArtWebApi.Migrations
 {
     [DbContext(typeof(KsmartContext))]
-    partial class KsmartContextModelSnapshot : ModelSnapshot
+    [Migration("20241215212153_AddMedia Table")]
+    partial class AddMediaTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +33,6 @@ namespace KSMArtWebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ArtistName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FileName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -42,9 +42,6 @@ namespace KSMArtWebApi.Migrations
                         .HasColumnType("nchar(10)")
                         .IsFixedLength();
 
-                    b.Property<int?>("Genre")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("LastViewed")
                         .HasColumnType("datetime");
 
@@ -52,7 +49,7 @@ namespace KSMArtWebApi.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("Media")
+                    b.Property<int?>("MediaID")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Price")
@@ -68,11 +65,10 @@ namespace KSMArtWebApi.Migrations
                     b.Property<int?>("Views")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Year")
-                        .HasColumnType("int");
-
                     b.HasKey("Id")
                         .HasName("PK__tmp_ms_x__3214EC0749B4AE18");
+
+                    b.HasIndex("MediaID");
 
                     b.ToTable("Art Object", (string)null);
                 });
@@ -103,22 +99,6 @@ namespace KSMArtWebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("KSMArtWebApi.Models.Genre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Genre");
                 });
 
             modelBuilder.Entity("KSMArtWebApi.Models.ItemViews", b =>
@@ -163,6 +143,15 @@ namespace KSMArtWebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Media");
+                });
+
+            modelBuilder.Entity("KSMArtWebApi.Models.ArtObject", b =>
+                {
+                    b.HasOne("KSMArtWebApi.Models.Media", "Media")
+                        .WithMany()
+                        .HasForeignKey("MediaID");
+
+                    b.Navigation("Media");
                 });
 #pragma warning restore 612, 618
         }

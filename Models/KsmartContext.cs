@@ -18,6 +18,9 @@ public partial class KsmartContext : DbContext
     public virtual DbSet<ArtObject> ArtObjects { get; set; }
     public virtual DbSet<ItemViews> ItemViews { get; set; }
     public virtual DbSet<Comment> Comments { get; set; }
+    public virtual DbSet<Media> Media { get; set; }
+    public virtual DbSet<Genre> Genre { get; set; }
+
 
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //    => optionsBuilder.UseSqlServer("Data Source=ksmartsqldb.database.windows.net;Initial Catalog=KSMArtdb;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Authentication=ActiveDirectoryInteractive;Application Intent=ReadWrite;Multi Subnet Failover=False");
