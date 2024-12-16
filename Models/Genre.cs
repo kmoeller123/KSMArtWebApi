@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KSMArtWebApi.Models
 {
@@ -7,6 +8,7 @@ namespace KSMArtWebApi.Models
     {
         public int Id { get; set; }
 
+        [Required(AllowEmptyStrings =false)]
         public string? Name { get; set; }
     }
 }

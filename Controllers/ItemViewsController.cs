@@ -84,7 +84,7 @@ namespace KSMArtWebApi.Controllers
         }
 
         // DELETE: api/ItemViews/5
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete{id}")]
         public async Task<IActionResult> DeleteItemViews(int id)
         {
             var itemViews = await _context.ItemViews.FindAsync(id);

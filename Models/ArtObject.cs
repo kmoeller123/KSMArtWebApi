@@ -11,12 +11,10 @@ public partial class ArtObject
     public string? UserName { get; set; }
 
     public string? ArtistName { get; set; }
+  
+    public string? Media { get; set; }
 
-    [ForeignKey("Media")]
-    public int? Media { get; set; }
-
-    [ForeignKey("Genre")]
-    public int? Genre { get; set; }
+     public string? Genre { get; set; }
 
     public int? Year { get; set; }
 

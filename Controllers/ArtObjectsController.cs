@@ -89,7 +89,7 @@ namespace KSMArtWebApi.Controllers
         }
 
         // DELETE: api/ArtObjects/5
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteArtObject(int id)
         {
             var artObject = await _context.ArtObjects.FindAsync(id);
